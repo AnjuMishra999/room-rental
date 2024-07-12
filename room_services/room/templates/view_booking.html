@@ -1,0 +1,43 @@
+{% include 'admin_navigation.html' %}
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    My Booking
+</marquee>
+<table class="table table-hover mt-3">
+    <tr bgcolor="gray">
+        <th>S.No </th>
+        <th>Name </th>
+        <th>Email </th>
+        <th>Contact </th>
+        <th>Room Number</th>
+        <th>Booking Date</th>
+        <th>Days</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th><span style="margin-left:50px;">Action</span></th>
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.full_name}}</td>
+        <td>{{i.email_id}}</td>
+        <td>{{i.mobile1}}<br>{{i.mobile2}}</td>
+        <td>{{i.room_no}}</td>
+        <td>{{i.booking_date}}</td>
+        <td>{{i.days}}Days</td>
+        <td>Rs.{{i.price}}</td>
+        <td><a href="{% url 'change_status' i.id %}" class="btn btn-light btn-sm">
+            {% if i.status == "Confirm" %}
+            <span style="color:green;">{{i.status}}</span>
+            {% endif %}
+            {% if i.status == "Canceled" %}
+            <span style="color:red";">{{i.status}}</span>
+            {% endif%}
+            {% if i.status == "Pending" %}
+            <span style="color:blue;">{{i.status}}</span>
+            {% endif %}
+        </a></td>
+        <td align="center"><a href="{% url 'delete_booking' i.id %}" class="btn btn-danger btn-sm" >Delete Booking</a></td>
+    </tr>
+    {% endfor %}
+</table>

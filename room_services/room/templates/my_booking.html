@@ -1,0 +1,38 @@
+{% include 'user_navigation.html' %}
+
+<marquee style="font-family: 'Monotype Corsiva'; font-size:25px; color:darkcyan; background-color:black; font-weight:bold; margin-top:1%">
+    My Booking
+</marquee>
+<table class="table table-hover mt-3">
+    <tr bgcolor="pink">
+        <th>Room No </th>
+        <th>Name </th>
+        <th>Email </th>
+        <th>Contact </th>
+        <th>Booking</th>
+        <th>No. of days</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th><span style="margin-left:50px;">Action</span></th>
+    </tr>
+    {% for i in data %}
+    {% if i.email_id == request.user.username %}
+
+
+    <tr>
+        <td align="center" style="background:mediumpurple"><b>{{i.room_no}}</b></td>
+        <td>{{i.full_name}}</td>
+        <td>{{i.email_id}}</td>
+        <td>{{i.mobile1}}<br>{{i.mobile2}}</td>
+        <td>{{i.booking_date}}</td>
+        <td>{{i.days}}Days</td>
+        <td>Rs.{{i.price}}</td>
+        <td>{{i.status}}</td>
+        <td align="center"><a href="{% url 'cancel_booking' i.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you Sure?')">Cancel Booking</a></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+
+{% include 'footer.html' %}
